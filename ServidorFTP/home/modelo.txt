@@ -1,0 +1,13 @@
+usuarios (#id, login, password, nombre, nif)
+direcciones_usuarios (#id, direccion, -id_usuario)
+telefonos_usuarios (#id, telefono, -id_usuario)
+formas_pago_usuarios (#id, forma_pago, -id_usuario)
+secciones (#id, codigo, nombre, descripcion, fecha)
+productos (#id, codigo, nombre, descripcion, cantidad, precio)
+pedidos (#id, numero, datos_contacto, estado, fecha, direccion_envio, forma_pago, precio_total, -id_usuario, -id_factura)
+facturas (#id, numero_factura, fecha, fecha_pago, moneda, base_imponible, iva, precio_total, emisor, nombre, nif, direccion, telefono,
+          forma_pago)
+lineas_detalle_facturas (#id, cantidad, nombre, precio, -id_factura)
+visitas (#id, -id_usuario, -id_seccion, fecha)
+seccion_producto (#id, -id_seccion, -id_producto)
+pedido_producto (#id, -id_pedido, -id_producto, cantidad, precio)
