@@ -7,7 +7,7 @@ import java.net.Socket;
 /**
  * Representa al servidor echo
  * @author Santiago Faci
- *
+ * @version curso 2014-2015
  */
 public class Servidor {
 
@@ -19,7 +19,7 @@ public class Servidor {
 	}
 	
 	/**
-	 * Indica si el servidor est· conectado
+	 * Indica si el servidor est√° conectado
 	 * @return
 	 */
 	public boolean estaConectado() {
@@ -42,8 +42,8 @@ public class Servidor {
 	}
 	
 	/**
-	 * Escucha la conexiÛn de un cliente
-	 * @return El socket de conexiÛn con el cliente
+	 * Escucha la conexi√≥n de un cliente
+	 * @return El socket de conexi√≥n con el cliente
 	 * @throws IOException
 	 */
 	public Socket escuchar() throws IOException {

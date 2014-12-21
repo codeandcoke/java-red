@@ -17,11 +17,11 @@ import javax.swing.event.HyperlinkListener;
 
 /**
  * Navegador Web en Java
- * Ejemplo que utiliza JEditorPane para renderizar páginas web
+ * Ejemplo que utiliza JEditorPane para renderizar pÃ¡ginas web
  * Hay que modificar el ContentType del componente para que soporte html (text/html)
  * 
  * @author Santiago Faci
- * @version 1.0
+ * @version curso 2014-2015
  *
  */
 public class Navegador {
@@ -31,9 +31,6 @@ public class Navegador {
 	private JLabel lbEstado;
 	private JEditorPane epPagina;
 
-	/**
-	 * Launch the application.
-	 */
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
@@ -55,12 +52,12 @@ public class Navegador {
 	}
 	
 	/*
-	 * Prepara la dirección escrita por el usuario
+	 * Prepara la direcciÃ³n escrita por el usuario
 	 * para cargarla en el JEditorPane
 	 */
 	private void cargarPagina() {
 		
-		// Añade http:// en la dirección si es necesario
+		// AÃ±ade http:// en la direcciÃ³n si es necesario
 		String direccion = tfDireccion.getText();
 		if (!direccion.startsWith("http://"))
 			direccion = "http://".concat(direccion);
@@ -69,12 +66,12 @@ public class Navegador {
 		try {
 			mostrarPagina(new URL(direccion));
 		} catch (MalformedURLException murle) {
-			lbEstado.setText("La dirección no es válida. Compruébala");
+			lbEstado.setText("La direcciÃ³n no es vÃ¡lida. CompruÃ©bala");
 		}
 	}
 	
 	/*
-	 * Carga la página que indica la url en el JEditorPane
+	 * Carga la pÃ¡gina que indica la url en el JEditorPane
 	 */
 	private void mostrarPagina(final URL url) {
 		
@@ -84,12 +81,12 @@ public class Navegador {
 				try {
 					lbEstado.setText("Cargando . . .");
 					
-					// Carga la página en el JEditorPane
+					// Carga la pÃ¡gina en el JEditorPane
 					epPagina.setPage(url);
 					
 					lbEstado.setText("Listo");
 				} catch (IOException ioe) {
-					lbEstado.setText("Se ha producido un error con la conexión. Inténtalo de nuevo");
+					lbEstado.setText("Se ha producido un error con la conexiÃ³n. IntÃ©ntalo de nuevo");
 				}	
 			}
 		});
@@ -134,7 +131,7 @@ public class Navegador {
 			epPagina = new JEditorPane();
 			epPagina.addHyperlinkListener(new HyperlinkListener() {
 				public void hyperlinkUpdate(HyperlinkEvent he) {
-					// Si el usuario ha hecho click se muestra la página de la url
+					// Si el usuario ha hecho click se muestra la pï¿½gina de la url
 					if (he.getEventType() == HyperlinkEvent.EventType.ACTIVATED) 
 						mostrarPagina(he.getURL());
 				}

@@ -5,9 +5,9 @@ import java.net.InetAddress;
 import java.net.UnknownHostException;
 
 /**
- * Aplicación que realiza un ping sobre un equipo remoto
+ * AplicaciÃ³n que realiza un ping sobre un equipo remoto
  * @author Santi
- *
+ * @version curso 2014-2015
  */
 public class Ping {
 
@@ -17,12 +17,12 @@ public class Ping {
 	public static void main(String args[]) {
 		
 		try {
-			// Obtiene la dirección del equipo remoto
+			// Obtiene la direcciÃ³n del equipo remoto
 			InetAddress equipoRemoto = InetAddress.getByName(IP);
 			
 			// Realiza varias intentos
 			for (int i = 0; i < INTENTOS; i++) {
-				// Comprueba si el equipo respone con un timeout máximo de 3000 ms
+				// Comprueba si el equipo respone con un timeout mÃ¡ximo de 3000 ms
 				if (equipoRemoto.isReachable(3000))
 					System.out.println("El equipo responde");
 				else

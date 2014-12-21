@@ -6,9 +6,9 @@ import java.net.Socket;
 import java.util.ArrayList;
 
 /**
- * Representa al servidor echo
+ * Servidor de Chat
  * @author Santiago Faci
- *
+ * @version curso 2014-2015
  */
 public class Servidor {
 
@@ -19,7 +19,7 @@ public class Servidor {
 	
 	public Servidor(int puerto) {
 		this.puerto = puerto;
-		clientes = new ArrayList<Cliente>();
+		clientes = new ArrayList<>();
 	}
 	
 	public void anadirCliente(Cliente cliente) {
@@ -32,9 +32,8 @@ public class Servidor {
 	
 	public void enviarATodos(String mensaje) {
 		
-		for (Cliente cliente : clientes) {
+		for (Cliente cliente : clientes)
 			cliente.getSalida().println(mensaje);
-		}
 	}
 	
 	/**
@@ -67,7 +66,7 @@ public class Servidor {
 	}
 	
 	/**
-	 * Indica si el servidor est· conectado
+	 * Indica si el servidor est√° conectado
 	 * @return
 	 */
 	public boolean estaConectado() {
@@ -90,8 +89,8 @@ public class Servidor {
 	}
 	
 	/**
-	 * Escucha la conexiÛn de un cliente
-	 * @return El socket de conexiÛn con el cliente
+	 * Escucha la conexi√≥n de un cliente
+	 * @return El socket de conexi√≥n con el cliente
 	 * @throws IOException
 	 */
 	public Socket escuchar() throws IOException {

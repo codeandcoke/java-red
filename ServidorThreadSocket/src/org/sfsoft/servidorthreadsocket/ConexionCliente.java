@@ -7,10 +7,10 @@ import java.io.PrintWriter;
 import java.net.Socket;
 
 /**
- * Gestiona la comunicación con cada uno de los clientes
+ * Gestiona la comunicaciÃ³n con cada uno de los clientes
  * conectados al servidor
  * @author Santiago Faci
- *
+ * @version curso 2014-2015
  */
 public class ConexionCliente extends Thread {
 
@@ -27,25 +27,25 @@ public class ConexionCliente extends Thread {
 	
 	@Override
 	public void run() {
-		System.out.println("Iniciando comunicación con el cliente");
+		System.out.println("Iniciando comunicaciÃ³n con el cliente");
 		
-		// Envía algunos mensajes al cliente en cuanto éste se conecta
+		// EnvÃ­a algunos mensajes al cliente en cuanto Ã©ste se conecta
 		salida.println("Hola " + socket.getInetAddress().getHostName());
-		salida.println("Sólo sé repetir lo que me escribas");
-		salida.println("Cuando escribas '.', se terminará la conexión");
+		salida.println("SÃ³lo sÃ© repetir lo que me escribas");
+		salida.println("Cuando escribas '.', se terminarÃ¡ la conexiÃ³n");
 		
 		try {
 			String linea = null;
 			/*
-			 * Espera la entrada por parte del cliente y actúa según
+			 * Espera la entrada por parte del cliente y actÃºa segÃºn
 			 * su protocolo: Repetir los mensajes y si el cliente
-			 * envía el caracter . salir
+			 * envÃ­a el caracter . salir
 			 */
 			while ((linea = entrada.readLine()) != null) {
 				
 				if (linea.equals(".")) {
 					salida.println("Saliendo . . .");
-					// Cierra la conexión con el cliente
+					// Cierra la conexiÃ³n con el cliente
 					socket.close();
 					break;
 				}

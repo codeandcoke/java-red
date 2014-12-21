@@ -9,13 +9,13 @@ import java.io.InputStreamReader;
 import java.net.Socket;
 
 /**
- * Clase que se encarga de gestionar la comunicaciÛn con cada cliente
+ * Clase que se encarga de gestionar la comunicaci√≥n con cada cliente
  * que se conecta a este servidor web
  * 
- * Es capaz de enviar p·gina HTML e im·genes JPG
+ * Es capaz de enviar una p√°gina HTML e im√°genes JPG
  * 
  * @author Santiago Faci
- * @version 1.0
+ * @version curso 2014-2015
  *
  */
 public class Cliente extends Thread {
@@ -32,7 +32,7 @@ public class Cliente extends Thread {
 	}
 	
 	/*
-	 * Cierra la conexiÛn con el cliente
+	 * Cierra la conexi√≥n con el cliente
 	 */
 	private void desconectar() throws IOException {
 		
@@ -51,11 +51,11 @@ public class Cliente extends Thread {
 	public void run() {
 		
 		try {
-			// Lee la peticiÛn del navegador (sÛlo la primera lÌnea)
+			// Lee la petici√≥n del navegador (s√≥lo la primera l√≠nea)
 			String peticion = entrada.readLine();
 			System.out.println(peticion);
 			
-			// El navegador est· solicitando una p·gina web
+			// El navegador est√° solicitando una p√°gina web
 			if (peticion.startsWith("GET")) {
 				String[] partes = peticion.split(" ");
 				String rutaFichero = partes[1].substring(1);
@@ -63,7 +63,7 @@ public class Cliente extends Thread {
 				System.out.println(rutaFichero);
 				
 				/*
-				 *  Si no ha solicitado ninguna p·gina es que ha solicitado la p·gina por defecto
+				 *  Si no ha solicitado ninguna p√°gina es que ha solicitado la p√°gina por defecto
 				 *  que normalmente es index.html
 				 */
 				if (rutaFichero.equals(""))
@@ -76,7 +76,7 @@ public class Cliente extends Thread {
 					salida.writeBytes("HTTP/1.0 404 Not Found\r\n");
 					salida.writeBytes("\r\n");
 					salida.writeBytes("<html><body>Documento no encontrado</body></html>\r\n");
-					System.out.println("p·gina no encontrada");
+					System.out.println("p√°gina no encontrada");
 					desconectar();
 					return;
 				}
@@ -96,9 +96,9 @@ public class Cliente extends Thread {
 				else if (rutaFichero.endsWith(".html"))
 					salida.writeBytes("Content-Type: text/html\r\n");
 				salida.writeBytes("Content-Length: " + tamanoFichero + "\r\n");
-				// LÌnea en blanco, obligatoria seg˙n el protocolo
+				// L√≠nea en blanco, obligatoria seg√∫n el protocolo
 				salida.writeBytes("\r\n");
-				// EnvÌa el contenido del fichero
+				// Env√≠a el contenido del fichero
 				salida.write(bytes, 0, tamanoFichero);
 				
 				desconectar();

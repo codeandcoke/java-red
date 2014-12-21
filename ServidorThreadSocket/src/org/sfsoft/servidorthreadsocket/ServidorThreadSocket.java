@@ -4,11 +4,11 @@ package org.sfsoft.servidorthreadsocket;
 import java.io.IOException;
 
 /**
- * Ejemplo de Servidor con soporte para múltiples cliente
+ * Ejemplo de Servidor con soporte para mÃºltiples cliente
  * utilizando hilos
  * 
  * @author Santiago Faci
- *
+ * @version curso 2014-2015
  */
 public class ServidorThreadSocket {
 
@@ -20,8 +20,8 @@ public class ServidorThreadSocket {
 		try {
 			// Inicia el servidor
 			servidor.conectar();
-			// Mientras el servidor esté conectado aceptas nuevas
-			// conexiones de clientes, que serán atendidas a través
+			// Mientras el servidor estÃ¡ conectado aceptas nuevas
+			// conexiones de clientes, que serÃ¡n atendidas a travÃ©s
 			// de hilos
 			while (servidor.estaConectado()) {
 				cliente = new ConexionCliente(servidor.escuchar());

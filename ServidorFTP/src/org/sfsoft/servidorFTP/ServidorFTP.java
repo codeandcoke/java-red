@@ -12,15 +12,14 @@ import org.apache.ftpserver.usermanager.PropertiesUserManagerFactory;
 
 /**
  * Ejemplo de servidor FTP en Java
- * utilizando la librerÌa ftpserver de Apache
+ * utilizando la librer√≠a ftpserver de Apache
  * http://mina.apache.org/ftpserver-project/
  * 
- * Proporciona autenticaciÛn de usuarios basada en un fichero (usuarios.properties) 
- * con las contraseÒas cifradas mediante MD5
+ * Proporciona autenticaci√≥n de usuarios basada en un fichero (usuarios.properties)
+ * con las contrase√±as cifradas mediante MD5
  * 
  * @author Santiago Faci
- * @version 1.0
- *
+ * @version curso 2014-2015
  */
 public class ServidorFTP {
 
@@ -30,22 +29,22 @@ public class ServidorFTP {
 		
 		FtpServerFactory serverFactory = new FtpServerFactory();
 	
-		// Ajusta el puerto en el que escuchar· el servidor
+		// Ajusta el puerto en el que escuchar√° el servidor
 		ListenerFactory miListenerFactory = new ListenerFactory();
-		miListenerFactory.setPort(21);
+		miListenerFactory.setPort(PUERTO);
 		serverFactory.addListener("default", miListenerFactory.createListener());
 		
 		try {
 			/*
-			 *  Fija la configuraciÛn del servidor
-			 *  En este caso se habilita el uso de usuarios anÛnimos
+			 *  Fija la configuraci√≥n del servidor
+			 *  En este caso se habilita el uso de usuarios an√≥nimos
 			 */
 			ConnectionConfigFactory miConnectionConfigFactory = new ConnectionConfigFactory();
 			miConnectionConfigFactory.setAnonymousLoginEnabled(true);
 			ConnectionConfig connectionConfig = miConnectionConfigFactory.createConnectionConfig();
 			serverFactory.setConnectionConfig(connectionConfig);
 		
-			// Fija la configuraciÛn de las cuentas de usuario
+			// Fija la configuraci√≥n de las cuentas de usuario
 			PropertiesUserManagerFactory userManagerFactory = new PropertiesUserManagerFactory();
 			userManagerFactory.setFile(new File("usuarios.properties"));         
 			serverFactory.setUserManager(userManagerFactory.createUserManager());

@@ -10,7 +10,7 @@ import java.net.ServerSocket;
  * cada una de esas conexiones
  * 
  * @author Santiago Faci
- * @version 1.0
+ * @version curso 2014-2015
  *
  */
 public class Servidor {
@@ -28,7 +28,7 @@ public class Servidor {
 				
 				Cliente cliente = new Cliente(servidor.accept());
 				cliente.start();
-				System.out.println("Iniciando comunicación con un cliente . . .");
+				System.out.println("Iniciando comunicaciÃ³n con un cliente . . .");
 			}
 			
 			if (servidor != null)

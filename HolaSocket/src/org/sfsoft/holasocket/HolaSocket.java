@@ -10,10 +10,10 @@ import java.net.UnknownHostException;
 /**
  * Proyecto de prueba que utiliza un socket para conectar
  * con un servidor de echo en un equipo remoto
- * Un servidor de echo es un servicio que emite el mismo mensaje que se le envÌa
+ * Un servidor de echo es un servicio que emite el mismo mensaje que se le env√≠a
  * 
  * @author Santiago Faci
- *
+ * @version curso 2014-2015
  */
 public class HolaSocket {
 
@@ -21,11 +21,11 @@ public class HolaSocket {
 		
 		// Nombre del host remoto, donde haya disponible un servidor echo
 		String hostname = "videosdeinformatica.com";
-		// Puerto donde conectar· el socket
+		// Puerto donde conectar√° el socket
 		int puerto = 7;
 		
 		try {
-			// Establece la conexiÛn con el servicio remoto
+			// Establece la conexi√≥n con el servicio remoto
 			Socket socket = new Socket(hostname, puerto);
 			// Establece el flujo de salida hacia el servicio remoto
 			PrintWriter salida = new PrintWriter(socket.getOutputStream(), true);
@@ -36,13 +36,13 @@ public class HolaSocket {
 			
 			String cadena = null;
 			/*
-			 * Captura por teclado una lÌnea, la envÌa al servicio y lee la respuesta
-			 * de Èste
+			 * Captura por teclado una l√≠nea, la env√≠a al servicio y lee la respuesta
+			 * de √©ste
 			 */
 			while ((cadena = teclado.readLine()) != null) {
-				// EnvÌa el mensaje al servicio a travÈs del socket
+				// Env√≠a el mensaje al servicio a trav√©s del socket
 				salida.println(cadena);
-				// Lee la respuesta del servicio a travÈs del socket
+				// Lee la respuesta del servicio a trav√©s del socket
 				System.out.println(entrada.readLine());
 			}
 			

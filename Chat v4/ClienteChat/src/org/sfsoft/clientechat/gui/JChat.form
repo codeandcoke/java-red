@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<form xmlns="http://www.intellij.com/uidesigner/form/" version="1" bind-to-class="org.sfsoft.clientechat.gui.JChat">
+  <grid id="27dc6" binding="panel" layout-manager="BorderLayout" hgap="0" vgap="0">
+    <constraints>
+      <xy x="20" y="20" width="500" height="400"/>
+    </constraints>
+    <properties>
+      <preferredSize width="800" height="600"/>
+    </properties>
+    <border type="none"/>
+    <children>
+      <grid id="c63bf" layout-manager="BorderLayout" hgap="0" vgap="0">
+        <constraints border-constraint="South"/>
+        <properties/>
+        <border type="none"/>
+        <children>
+          <component id="b88ac" class="javax.swing.JLabel" binding="lbEstado">
+            <constraints border-constraint="South"/>
+            <properties>
+              <requestFocusEnabled value="false"/>
+              <text value=" JChat"/>
+            </properties>
+          </component>
+          <component id="b5a0f" class="javax.swing.JTextField" binding="tfMensaje">
+            <constraints border-constraint="North"/>
+            <properties>
+              <focusCycleRoot value="false"/>
+              <focusTraversalPolicyProvider value="false"/>
+            </properties>
+          </component>
+        </children>
+      </grid>
+      <splitpane id="aceeb">
+        <constraints border-constraint="Center"/>
+        <properties>
+          <dividerLocation value="650"/>
+          <lastDividerLocation value="491"/>
+        </properties>
+        <border type="none"/>
+        <children>
+          <scrollpane id="56ead">
+            <constraints>
+              <splitpane position="right"/>
+            </constraints>
+            <properties>
+              <requestFocusEnabled value="false"/>
+            </properties>
+            <border type="none"/>
+            <children>
+              <component id="58666" class="javax.swing.JList" binding="jlUsuarios">
+                <constraints/>
+                <properties/>
+              </component>
+            </children>
+          </scrollpane>
+          <scrollpane id="73af3">
+            <constraints>
+              <splitpane position="left"/>
+            </constraints>
+            <properties/>
+            <border type="none"/>
+            <children>
+              <component id="5b799" class="javax.swing.JTextArea" binding="taChat">
+                <constraints/>
+                <properties>
+                  <editable value="false"/>
+                </properties>
+              </component>
+            </children>
+          </scrollpane>
+        </children>
+      </splitpane>
+    </children>
+  </grid>
+</form>
