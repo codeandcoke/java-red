@@ -5,6 +5,8 @@ import org.sfsoft.clientechat.utils.Constantes;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 
 /**
  * Diálogo que muestra una caja de texto para introducir el host donde está
@@ -17,13 +19,9 @@ public class JConecta extends JDialog {
     private JTextField tfHost;
     private JButton btCancelar;
     private JButton btConectar;
-    private JTextField tfUsuario;
-    private JPasswordField tfContrasena;
     private JLabel lbEstado;
 
     private String host;
-    private String usuario;
-    private String contrasena;
     private Constantes.Accion accion;
 
     public JConecta() {
@@ -47,21 +45,22 @@ public class JConecta extends JDialog {
                 cancelar();
             }
         });
+        tfHost.addKeyListener(new KeyAdapter() {
+            @Override
+            public void keyReleased(KeyEvent e) {
+                if (e.getKeyCode() == KeyEvent.VK_ENTER)
+                    btConectar.doClick();
+            }
+        });
     }
+
 
     private void aceptar() {
         accion = Constantes.Accion.ACEPTAR;
 
         host = tfHost.getText();
-        usuario = tfUsuario.getText();
-        contrasena = tfContrasena.getPassword().toString();
-
         if (host.equals("")) {
             lbEstado.setText("Introduce el host");
-            return;
-        }
-        if (usuario.equals("") || contrasena.equals("")) {
-            lbEstado.setText("Introduce el nombre de usuario y la contraseña");
             return;
         }
 
@@ -75,14 +74,6 @@ public class JConecta extends JDialog {
 
     public String getHost() {
         return host;
-    }
-
-    public String getUsuario() {
-        return usuario;
-    }
-
-    public String getContrasena() {
-        return contrasena;
     }
 
     public Constantes.Accion mostrarDialogo() {

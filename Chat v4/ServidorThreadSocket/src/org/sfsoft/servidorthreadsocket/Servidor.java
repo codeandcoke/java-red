@@ -53,10 +53,8 @@ public class Servidor {
 	public String obtenerNicks() {
 	
 		String nicks = "/nicks,";
-		
-		for (Cliente cliente : clientes) {
+		for (Cliente cliente : clientes)
 			nicks += cliente.getNick() + ",";
-		}
 		
 		return nicks;
 	}

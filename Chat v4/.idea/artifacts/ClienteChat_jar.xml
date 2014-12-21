@@ -1,0 +1,10 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="ClienteChat:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/ClienteChat_jar</output-path>
+    <root id="archive" name="ClienteChat.jar">
+      <element id="module-output" name="ClienteChat" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/ClienteChat/libs/jgoodies-forms-1.8.0.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/ClienteChat/libs/jgoodies-common-1.8.0.jar" path-in-jar="/" />
+    </root>
+  </artifact>
+</component>

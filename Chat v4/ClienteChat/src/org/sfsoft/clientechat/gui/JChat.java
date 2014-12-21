@@ -26,7 +26,6 @@ public class JChat {
     private JTextField tfMensaje;
     private JLabel lbEstado;
     private JTextArea taChat;
-    private JTextPane tpChat;
 
     private DefaultListModel mListaUsuarios;
     private Socket socket;
@@ -35,11 +34,13 @@ public class JChat {
     private boolean conectado;
     private static final int PUERTO = 5000;
 
+
     public JChat() {
         tfMensaje.addKeyListener(new KeyAdapter() {
             @Override
-            public void keyTyped(KeyEvent e) {
-                super.keyTyped(e);
+            public void keyReleased(KeyEvent e) {
+                if (e.getKeyCode() == KeyEvent.VK_ENTER)
+                    enviarMensaje();
             }
         });
 
@@ -52,6 +53,7 @@ public class JChat {
         JMenu menu = new JMenu("JChat");
         menuBar.add(menu);
         JMenuItem menuItem = new JMenuItem("Conectar");
+        menuItem.setAccelerator(KeyStroke.getKeyStroke("control C"));
         menuItem.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent event) {
@@ -88,13 +90,19 @@ public class JChat {
 
     private void conectar() {
 
-        JConecta jConecta = new JConecta();
+        final JConecta jConecta = new JConecta();
 
         if (jConecta.mostrarDialogo() == Constantes.Accion.CANCELAR)
             return;
 
-        String host = jConecta.getHost();
-        conectarServidor(host);
+        // Ejecuta el método en el EDT (Event Dispatch Thread)
+        SwingUtilities.invokeLater(new Runnable() {
+            @Override
+            public void run() {
+                String host = jConecta.getHost();
+                conectarServidor(host);
+            }
+        });
     }
 
     private void conectarServidor(String servidor) {
@@ -104,46 +112,45 @@ public class JChat {
             salida = new PrintWriter(socket.getOutputStream(), true);
             entrada = new BufferedReader(new InputStreamReader(socket.getInputStream()));
             conectado = true;
+            lbEstado.setText("Conectado");
 
-            Thread hiloRecibir = new Thread(new Runnable() {
-                public void run() {
-                    while (conectado) {
-                        try {
-                            if (socket.isClosed()) {
-                                conectado = false;
-                                break;
-                            }
-                            String mensaje = entrada.readLine();
-                            if (mensaje == null)
-                                continue;
-
-                            int indice = 0;
-                            if (mensaje.startsWith("/server")) {
-                                indice = mensaje.indexOf(" ");
-                                taChat.append("** " + mensaje.substring(indice + 1) + " **\n");
-                            }
-                            else if (mensaje.startsWith("/users")) {
-                                indice = mensaje.indexOf(" ", 7);
-                                String nick = mensaje.substring(7, indice);
-                                taChat.append("#" + nick + "# ");
-                                taChat.append(mensaje.substring(indice + 1) + "\n");
-                            }
-                            else if (mensaje.startsWith("/nicks")) {
-                                String[] nicks = mensaje.split(",");
-                                mListaUsuarios.clear();
-                                for (int i = 1; i < nicks.length - 1; i++) {
-                                    mListaUsuarios.addElement(nicks[i]);
+                Thread hiloRecibir = new Thread(new Runnable() {
+                    public void run() {
+                        while (conectado) {
+                            try {
+                                if (socket.isClosed()) {
+                                    conectado = false;
+                                    break;
                                 }
+                                String mensaje = entrada.readLine();
+                                if (mensaje == null)
+                                    continue;
+
+                                int indice = 0;
+                                if (mensaje.startsWith("/server")) {
+                                    indice = mensaje.indexOf(" ");
+                                    taChat.append("** " + mensaje.substring(indice + 1) + " **\n");
+                                } else if (mensaje.startsWith("/users")) {
+                                    indice = mensaje.indexOf(" ", 7);
+                                    String nick = mensaje.substring(7, indice);
+                                    taChat.append("#" + nick + "# ");
+                                    taChat.append(mensaje.substring(indice + 1) + "\n");
+                                } else if (mensaje.startsWith("/nicks")) {
+                                    String[] nicks = mensaje.split(",");
+                                    mListaUsuarios.clear();
+                                    for (int i = 1; i < nicks.length; i++) {
+                                        mListaUsuarios.addElement(nicks[i]);
+                                    }
+                                }
+                            } catch (SocketException se) {
+                                desconectar();
+                            } catch (IOException ioe) {
+                                ioe.printStackTrace();
                             }
-                        } catch (SocketException se) {
-                            desconectar();
-                        } catch (IOException ioe) {
-                            ioe.printStackTrace();
                         }
                     }
-                }
-            });
-            hiloRecibir.start();
+                });
+                hiloRecibir.start();
 
         } catch (UnknownHostException uhe) {
             uhe.printStackTrace();
@@ -164,6 +171,7 @@ public class JChat {
         try {
             salida.println("/quit");
             conectado = false;
+            lbEstado.setText("Desconectado");
             socket.close();
         } catch (IOException ioe) {
             ioe.printStackTrace();

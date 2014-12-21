@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="ServidorThreadSocket:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/ServidorThreadSocket_jar</output-path>
+    <root id="archive" name="ServidorThreadSocket.jar">
+      <element id="module-output" name="ServidorThreadSocket" />
+    </root>
+  </artifact>
+</component>
