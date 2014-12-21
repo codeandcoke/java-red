@@ -1,4 +1,4 @@
-package org.sfsoft.servidorsmtp;
+package org.sfsoft.clientesmtp;
 
 import java.util.Date;
 import java.util.Properties;
@@ -10,18 +10,18 @@ import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 
 /**
- * Ejemplo Java que envía un mensaje de correo a un servidor SMTP
+ * Ejemplo Java que envÃ­a un mensaje de correo a un servidor SMTP
  * @author Santiago Faci
- * @version 1.0
+ * @version curso 2014-2015
  * 
- * Se ha empleado la librería JavaMail
+ * Se ha empleado la librerÃ­a JavaMail
  * https://java.net/projects/javamail/pages/Home#Download_JavaMail_1.5.1_Release
  * 
  * Para hacer pruebas se instala hmailserver en el equipo
  * http://www.hmailserver.com/
  *
  */
-public class ServidorSMTP {
+public class ClienteSMTP {
 
 	public static final String SERVIDOR = "midominio.com";
 	public static final String FROM = "yo@midominio.com";
@@ -29,12 +29,12 @@ public class ServidorSMTP {
 	public static final String CC = "copia@undominio.com";
 	public static final String BCC = "copiaoculta@mundominio.com";
 	public static final String SUBJECT = "Asunto del mensaje";
-	public static final String BODY = "Este mensaje es una prueba del servidor SMTP en Java";
+	public static final String BODY = "Este mensaje es una prueba del cliente SMTP en Java";
 	
 	public static void main(String args[]) {
 		
 		try {
-			// Inicializa una sesión
+			// Inicializa una sesiÃ³n
 			Properties props = System.getProperties();
 			props.put("JavaMailSMTP", SERVIDOR);
 			Session sesion = Session.getDefaultInstance(props, null);
@@ -43,14 +43,15 @@ public class ServidorSMTP {
 			Message mensaje = new MimeMessage(sesion);
 			mensaje.setFrom(new InternetAddress(SERVIDOR));
 			mensaje.setRecipients(Message.RecipientType.TO, InternetAddress.parse(TO, false));
+			// AÃ±ade destinatarios en copia/copia oculta
 			//mensaje.setRecipients(Message.RecipientType.CC, InternetAddress.parse(CC, false));
 			//mensaje.setRecipients(Message.RecipientType.BCC, InternetAddress.parse(BCC, false));
 			mensaje.setSubject(SUBJECT);
 			mensaje.setText(BODY);
-			// Fecha de envío
+			// Fecha de envÃ­o
 			mensaje.setSentDate(new Date());
 			
-			// Envía el mensaje
+			// EnvÃ­a el mensaje
 			System.out.println("Enviando mensaje . . .");
 			Transport.send(mensaje);
 			System.out.println("Mensaje enviado.");
